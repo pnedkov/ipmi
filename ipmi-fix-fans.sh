@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Check if ipmitool is installed
+command -v ipmitool > /dev/null || { echo "ERROR: ipmitool not found!"; exit 1; }
+
 # Input
 echo -n "IPMI host: "
 read host
