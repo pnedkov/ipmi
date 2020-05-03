@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# Thresholds
+t_low=75   # 75
+t_mid=150  # 225
+t_high=225 # 300
+
 # Check if ipmitool is installed
 command -v ipmitool > /dev/null || { echo "ERROR: ipmitool not found!"; exit 1; }
 
@@ -16,11 +21,8 @@ read -s password
 ipmitool -H $host -U $username -P $password sensor
 
 # Set fans thresholds
-l_low=75
-l_mid=150
-l_high=225
 for i in {1..6} A B; do
-    ipmitool -H $host -U $username -P $password sensor thres FAN$i lower $l_low $l_mid $l_high
+    ipmitool -H $host -U $username -P $password sensor thres FAN$i lower $t_low $t_mid $t_high
 done
 
 # Set fan speed mode
