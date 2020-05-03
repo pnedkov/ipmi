@@ -16,15 +16,9 @@ ipmitool -H $host -U $username -P $password sensor
 l_low=75
 l_mid=150
 l_high=225
-ipmitool -H $host -U $username -P $password sensor thres FAN1 lower $l_low $l_mid $l_high
-ipmitool -H $host -U $username -P $password sensor thres FAN1 lower $l_low $l_mid $l_high
-ipmitool -H $host -U $username -P $password sensor thres FAN2 lower $l_low $l_mid $l_high
-ipmitool -H $host -U $username -P $password sensor thres FAN3 lower $l_low $l_mid $l_high
-ipmitool -H $host -U $username -P $password sensor thres FAN4 lower $l_low $l_mid $l_high
-ipmitool -H $host -U $username -P $password sensor thres FAN5 lower $l_low $l_mid $l_high
-ipmitool -H $host -U $username -P $password sensor thres FAN6 lower $l_low $l_mid $l_high
-ipmitool -H $host -U $username -P $password sensor thres FANA lower $l_low $l_mid $l_high
-ipmitool -H $host -U $username -P $password sensor thres FANB lower $l_low $l_mid $l_high
+for i in {1..6} A B; do
+    ipmitool -H $host -U $username -P $password sensor thres FAN$i lower $l_low $l_mid $l_high
+done
 
 # Set fan speed mode
 # Input : NetFn 0x30 
